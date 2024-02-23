@@ -1,9 +1,13 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 import { ChangeEvent, FormEvent, useState } from "react"
-import {toast} from 'sonner'
+import { toast } from "sonner"
 
-export function NewCard() {
+interface NewCardProps {
+  onNoteCreate: (content: string) => void
+}
+
+export function NewCard({ onNoteCreate }: NewCardProps) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true)
   const [content, setContent] = useState("")
 
@@ -13,7 +17,7 @@ export function NewCard() {
 
   function handleContentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setContent(event.target.value)
-    
+
     if (event.target.value == "") {
       setShouldShowOnBoarding(true)
     }
@@ -21,6 +25,12 @@ export function NewCard() {
 
   function handleSaveNote(event: FormEvent) {
     event.preventDefault()
+
+    onNoteCreate(content)
+
+    setContent('')
+    setShouldShowOnBoarding(true)
+
     toast.success("Nota criada com sucesso!")
   }
 
@@ -68,6 +78,7 @@ export function NewCard() {
                 <textarea
                   onChange={handleContentChange}
                   autoFocus
+                  value={content}
                   className="text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none"
                 />
               )}
