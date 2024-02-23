@@ -21,6 +21,7 @@ O projeto faz parte da semana NLW Expert da Rocketseat, onde na trilha de React 
 - TypeScript
 - Date-fns
 - Radix
+- API Speech Recognition
 - Tailwind
 - Sonner
 - Vite
